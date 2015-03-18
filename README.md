@@ -20,8 +20,6 @@ Please submit as an
 [issue](https://github.com/web-create/harmony/issues/new), I am happy 
 to response back.
 
-<<<<<<< HEAD
-=======
 ## How to install/run
 
 1. [Fork](https://github.com/gayanvirajith/gaya) this repository.

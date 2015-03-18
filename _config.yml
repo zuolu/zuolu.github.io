@@ -56,5 +56,6 @@ exclude:
 
 # Sass conversion configs
 sass:
+  css_dir: assets/css
   sass_dir: assets/css/_sass
   style: :compressed
