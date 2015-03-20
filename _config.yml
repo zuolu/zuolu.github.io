@@ -1,14 +1,13 @@
 # Site settings
-title: Your awesome title
-tagline: And Tagline
-email: gayanvirajith@gmail.com
+title: 小崔的博客
+tagline: 
+email: cjw624923@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  Hi, I’m a professional UI/UX designrer and web developer. 
-  I love being minimal and creative.
-baseurl: "/gaya" # the subpath of your site, e.g. /blog/
-url: "http://gayan.me" # the base hostname & protocol for your site
+  Hi, I'm a Web Developer, 热爱ROR开发, HTML CSS Javascript学习, 目标成为一名Full Stack Developer.
+baseurl: "" # the subpath of your siimte, e.g. /blog/
+url: "http://xiaocuixt.github.io" # the base hostname & protocol for your site
 logourl: /assets/images/logo.png # Site logo
-author: "Tom Warlker"
+author: "XiaoCui"
 author_thumbnail: "/assets/images/avatar.jpg" # Author avatar
 # Theme customization - please change from the defaults!
 theme:
@@ -16,12 +15,12 @@ theme:
   highlight_color: "#205081" #205081" # "#272935"
   # Social media links, leave blank to ignore
   social: 
-    github: gayanvirajith
-    twitter: gayanvirajith
-    facebook: gayanvirajith
-    gplus: +gayanvirajith
+    github: xiaocuixt
+    twitter: xiaocuixt
+    facebook: xiaocuixt
+    gplus: +xiaocuixt
     # dribble: gayanvirajith
-    pinterest: gayanvirajith
+    pinterest: xiaocuixt
 
   # Enable share buttons on post footer
   show_share_buttons: true
@@ -30,7 +29,7 @@ theme:
   show_author_info: true
 
   # Disqus comments manager - shortname
-  # disqus_shortname: gaya-webcreate
+  disqus_shortname: xiaocuixt
 
   # Google Analytics/Webmaster key, leave blank to ignore
   google_analytics_key: 
