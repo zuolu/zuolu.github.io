@@ -6,7 +6,7 @@ categories: rails ajax
 comments: true
 ---
 
-参考： http://edgeguides.rubyonrails.org/working_with_javascript_in_rails.html
+参考： <a href="http://edgeguides.rubyonrails.org/working_with_javascript_in_rails.html">http://edgeguides.rubyonrails.org/working_with_javascript_in_rails.html</a>
 
 1. 创建模型:
 
@@ -33,7 +33,7 @@ def create
 
 3.创建view文件index.html.erb
 
-{% highlight ruby %}
+{% highlight html %}
 <h1>Listing Posts</h1>
 <table>
   <thead>
@@ -43,15 +43,17 @@ def create
     </tr>
   </thead>
   <tbody id="posts" >
-    <%= render @posts %>  #render @posts会自动render到_post.html.erb并自动迭代，在partial页面中使用post对象。
+    <%= render @posts %>  <!--render @posts会自动render到_post.html.erb并自动迭代，在partial页面中使用post对象。-->
   </tbody>
 </table>
 <br>
-<%= render "form"%>  #将新建的表单引入首页中
+<%= render "form"%>  <!-- 将新建的表单引入首页中 -->
+{% endhighlight %}
 
-#_form.html.erb页面
+_form.html.erb页面
 
-<%= form_for(@post,remote: true) do |f| %>  #remote: true指定表单为ajax提交方式, 该请求回自动请求道create.js.erb页面
+{% highlight html %}
+<%= form_for(@post,remote: true) do |f| %>  <!-- remote: true指定表单为ajax提交方式, 该请求回自动请求道create.js.erb页面 -->
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
@@ -62,16 +64,24 @@ def create
 <% end %>
 {% endhighlight %}
 
-4. _post.html.erb
+_post.html.erb页面
+
+{% highlight html %}
 <tr>
     <td><%= post.title %></td>
     <td><%= link_to 'Show', test %></td>
     <td><%= link_to 'Edit', edit_test_path(test) %></td>
     <td><%= link_to 'Destroy', test, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 </tr>
+{% endhighlight %}
 
-5.create.js.erb
-$("<%= escape_javascript(render @post) %>").appendTo("#posts");  #escape_javascript方法可简写为j, render @post会自动找到_post.html.erb, 使用jquery的appendTo方法，将新建对象附加到原有列表的后面.
+4.create.js.erb文件
 
-6.效果
+{% highlight html %}
+$("<%= escape_javascript(render @post) %>").appendTo("#posts");
+  <!-- escape_javascript方法可简写为j, render @post会自动找到_post.html.erb, 使用jquery的appendTo方法，将新建对象附加到原有列表的后面. -->
+{% endhighlight %}
+
+5.效果
+
 在index页面中输入表单，点击提交后实现无刷新实时显示。（常用于评论等提交）

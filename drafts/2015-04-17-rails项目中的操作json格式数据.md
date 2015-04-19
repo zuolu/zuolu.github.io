@@ -1,4 +1,4 @@
----
+<!-- ---
 layout: post
 title:  "rails项目中的操作json格式数据"
 date:   2015-04-17 11:41:00
@@ -34,3 +34,4 @@ json.title @posts.title
  https://github.com/rails/jbuilder
 jbuilder是一个简化json书写的DSL（区域专属语言）。在rails中不用编写很多大括号的代码，直接使用jbuilder模板渲染即可。
 如: app/views/message/show.json.jbuilder
+ -->

@@ -1,4 +1,4 @@
----
+<!-- ---
 layout: post
 title:  "rails中如何使用ajax"
 date:   2015-04-18 12:11:00
@@ -86,3 +86,4 @@ javascript:
       );
     });
   });
+ -->
