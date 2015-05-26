@@ -16,7 +16,7 @@ product.rb文件:
   require 'csv' #注意必须小写
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
-      Users.create! row.to_hash
+      Product.create! row.to_hash
     end
   end
 {% endhighlight %}
@@ -28,7 +28,7 @@ end
 {% endhighlight %}
 view文件:
 {% highlight ruby %}
-<%= form_tag home_path, multipart: true do %>
+<%= form_tag import_products_path, multipart: true do %>
   <%= file_field_tag :file %>
   <%= submit_tag "Import CSV" %>
 <% end %>
@@ -36,7 +36,7 @@ view文件:
 routes.rb文件：
 {% highlight ruby %}
   resources :products do
-    member do
+    collection do
       post :import
     end
   end
@@ -83,6 +83,33 @@ def self.import(file)
     end
   end
 {% endhighlight %}
+
+update -- 2015-05-26 --
+最近做了个关联表导入创建的功能，关系是has_many, 一个question关联多个option,例如一个题目对应4个选项的关系。
+
+{% highlight ruby %}
+def self.import(file)
+    allowed_attributes = [ "title", "signal_score", "correct_option", "correct_hint"]
+    spreadsheet = open_spreadsheet(file)
+    header = spreadsheet.row(2)
+    (3..spreadsheet.last_row).each do |i|   #从表格的第三行（包括第三行）开始迭代
+      row = Hash[[header, spreadsheet.row(i)].transpose] #transpose方法要好好看一下
+      question = Question.new
+      question.attributes = row.to_hash.select { |k,v| allowed_attributes.include? k }
+      question.save!
+      option_length = row.length - 4  #行中减去question选项长度,即option的长度
+      (1..option_length).each do |i|
+        _opt = 'option_' + i.to_s
+        option = question.options.new
+        option.name = row[_opt]
+        option.save!
+      end
+    end
+  end
+{% endhighlight %}
+
+数据结构：
+![alt tag](http://ww3.sinaimg.cn/bmiddle/738e4c72jw1esi17gpucij20jb02ct9j.jpg)
 
 参考： <a href="http://richonrails.com/articles/importing-csv-files">http://richonrails.com/articles/importing-csv-files</a>
 <a href="http://railscasts.com/episodes/396-importing-csv-and-excel">http://railscasts.com/episodes/396-importing-csv-and-excel</a>
