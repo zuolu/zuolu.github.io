@@ -61,15 +61,15 @@ end
 
 在model文件中定义import方法product.rb:
 {% highlight ruby %}
-require 'csv'
+require 'csv'  #如果需要引入csv的地方比较多可把这句提到config/application.rb中
 def self.import(file)
    allowed_attributes = [ "id","name","quantity","price","number"]
-    spreadsheet = open_spreadsheet(file)
-    header = spreadsheet.row(1)
-    (2..spreadsheet.last_row).each do |i|
-      row = Hash[[header, spreadsheet.row(i)].transpose]
-      product = find_by_id(row["id"]) || new
-      product.attributes = row.to_hash.select { |k,v| allowed_attributes.include? k }
+    spreadsheet = open_spreadsheet(file)  #使用open_spreadsheet方法读取文件
+    header = spreadsheet.row(1)  #获得excel文件的第一行，保存到header变量
+    (2..spreadsheet.last_row).each do |i|  #从第二行开始循环
+      row = Hash[[header, spreadsheet.row(i)].transpose]  #创建header中字段名为key,excel单元格内容为value的hash
+      product = find_by_id(row["id"]) || new  #row["id"]返回单元格中的id值，可以用其他值如row["number"]
+      product.attributes = row.to_hash.select { |k,v| allowed_attributes.include? k }  #select生成新的hash，并对应赋值.如果有单个值不能用这种赋值方法，可以先初始化u=row.to_hash.select { |k,v| allowed_attributes.include? k },再单独赋值u["number"]="xxx",再全部赋值：product.attributes=u.
       product.save!
     end
   end
@@ -85,7 +85,7 @@ def self.import(file)
 {% endhighlight %}
 
 update -- 2015-05-26 --
-最近做了个关联表导入创建的功能，关系是has_many, 一个question关联多个option,例如一个题目对应4个选项的关系。
+最近做了个关联表导入创建的功能，关系是has_many, 一个question关联多个option,例如一个题目对应4个选项的关系。最好加上事务处理实现非法数据自动回滚。现在验证方面还有问题有待研究
 
 {% highlight ruby %}
 def self.import(file)
