@@ -85,7 +85,7 @@ def self.import(file)
 {% endhighlight %}
 
 update -- 2015-05-26 --
-最近做了个关联表导入创建的功能，关系是has_many, 一个question关联多个option,例如一个题目对应4个选项的关系。最好加上事务处理实现非法数据自动回滚。现在验证方面还有问题有待研究
+最近做了个关联表导入创建的功能，关系是has_many, 一个question关联多个option,例如一个题目对应4个选项的关系。最好加上事务处理实现非法数据自动回滚。现在验证方面还有问题有待研究。
 
 {% highlight ruby %}
 def self.import(file)
